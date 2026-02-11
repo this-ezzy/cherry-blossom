@@ -1,12 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LoveConfetti from "./components/Confetti";
 
-export const metaData = {
-    title: "Cherry Blossom"
-}
+
 
 /* ================= CONFIG ================= */
 const PASSWORD = "2022-12-17";
@@ -46,6 +44,8 @@ export default function LovePage() {
     const [reasonIndex, setReasonIndex] = useState(0);
     const [slide, setSlide] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+
 
     const letter =
         "From the moment you walked into my life, everything changed. I built this little space just for you, because you deserve something made with intention. I love you deeply, today and always.";
@@ -71,11 +71,28 @@ export default function LovePage() {
         return () => clearInterval(interval);
     }, []);
 
-    /* Fire Confetti */
     const fireConfetti = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setShowConfetti(true);
+
+        if (audioRef.current) {
+            audioRef.current.volume = 0;
+            audioRef.current.play().catch((err) => console.log(err));
+
+            let vol = 0;
+            const fade = setInterval(() => {
+                if (audioRef.current && vol < 1) {
+                    vol = Math.min(vol + 0.05, 1); // ensure it never exceeds 1
+                    audioRef.current.volume = vol;
+                } else {
+                    clearInterval(fade);
+                }
+            }, 100);
+        }
+
+
     };
+
 
     const handleUnlock = () => {
         if (input === PASSWORD) {
@@ -139,32 +156,32 @@ export default function LovePage() {
 
     /* MAIN PAGE */
     return (
-        <main className="min-h-screen overflow-visible text-white bg-linear-to-br from-black via-purple-900 to-pink-900 p-8 space-y-10">
+        <main className="min-h-screen overflow-visible text-white bg-linear-to-br from-black via-purple-900 to-pink-900 p-4 md:p-8 space-y-10">
             {/* Confetti */}
             <LoveConfetti showConfetti={showConfetti} />
 
 
             {/* HERO */}
             <section className="text-center space-y-2">
-                <h1 className="text-6xl font-bold">For You ❤️</h1>
+                <h1 className="text-4xl md:text-6xl font-bold">For You ❤️</h1>
                 <p className="opacity-70">Something I built just for us</p>
             </section>
 
             {/* LETTER */}
             <section className="max-w-2xl mx-auto text-center">
-                <h2 className="text-2xl mb-4">A Note From Me</h2>
-                <p className="leading-7 text-lg">{typedText}|</p>
+                <h2 className="text-2xl mb-2">A Note From Me</h2>
+                <p className="leading-7 text-gray-200 md:text-lg">{typedText}|</p>
             </section>
 
             {/* SLIDESHOW */}
             <section className="text-center">
                 <h2 className="text-2xl mb-6">Our Moments</h2>
-                <div className="relative  w-125 h-125 mx-auto rounded-xl shadow-2xl">
+                <div className="relative shrink md:w-125 h-125 mx-auto rounded-xl shadow-2xl">
                     {images.map((img, i) => (
                         <Image
                             alt={`moment-${i}`}
-                            fill
-
+                            height={600}
+                            width={600}
                             key={i}
                             src={img}
                             className={`absolute w-full h-full object-cover rounded-xl transition-opacity duration-1000 ${slide === i ? "opacity-100" : "opacity-0"}`}
@@ -199,11 +216,16 @@ export default function LovePage() {
 
             {/* CELEBRATE BUTTON */}
             <section className="text-center">
+                <audio
+                    ref={audioRef}
+                    src="/Marc_Anthoni_-_I_NEED_YOU_(mp3.pm).mp3"
+                    preload="auto"
+                />
                 <button
                     onClick={fireConfetti}
                     className="bg-purple-600 px-6 py-3 rounded animate-pulse"
                 >
-                    Celebrate Us 🎉
+                    Click 2 celebrate Us 🎉
                 </button>
             </section>
 
