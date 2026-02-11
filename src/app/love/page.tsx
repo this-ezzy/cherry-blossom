@@ -9,7 +9,8 @@ export const metaData = {
 }
 
 /* ================= CONFIG ================= */
-const PASSWORD = "525232"; // change to anything (e.g. her name or date)
+const PASSWORD = "2022-12-17";
+
 
 const romanticHints = [
     "Oops… the number isn’t right, but think of the day that marks my love for you'. ❤️",
@@ -33,17 +34,6 @@ const reasons = [
 ];
 
 
-const timeline = [
-    { date: "First day we met", text: "I knew you were special instantly." },
-    { date: "Our first date", text: "I couldn’t stop smiling the whole night." },
-    { date: "Today", text: "Still choosing you every single day ❤️" },
-];
-
-const images = [
-    "/cherry-1.jpg",
-    "/cherry-6.JPG",
-    "/cherry-8.JPG",
-];
 
 /* ========================================== */
 
@@ -91,47 +81,59 @@ export default function LovePage() {
         if (input === PASSWORD) {
             setUnlocked(true);
         } else {
-            // cycle through romantic hints
             const nextIndex = (errorIndex + 1) % romanticHints.length;
             setErrorIndex(nextIndex);
             setErrorMessage(romanticHints[nextIndex]);
-            setInput(""); // clear input
+            setInput("");
         }
     };
+
 
     /* PASSWORD SCREEN */
     if (!unlocked) {
         return (
-            <div className="h-screen flex items-center justify-center bg-linear-to-br from-black via-purple-900 to-pink-900 text-white">
-                <div className="text-center space-y-4">
-                    <h1 className="text-3xl font-bold">For Your Eyes Only ❤️</h1>
-                    <div>
+            <div className="relative h-screen flex items-center justify-center text-white">
 
+                {/* Background Image */}
+                <div className="absolute inset-0 bg-[url(/IMG_0184.JPG)] bg-no-repeat bg-center bg-contain"></div>
+
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/60"></div>
+
+                {/* Content */}
+                <div className="relative z-10 text-center space-y-4">
+                    <h1 className="text-3xl font-bold">My Cherry Blossom ❤️</h1>
+
+                    <div>
                         <input
-                            type="password"
-                            placeholder="Enter our secret"
-                            className="px-4 py-2 rounded-md text-gray-200 border w-85 border-gray-400"
+                            type="date"
+
+                            className="px-4 py-2 rounded-md text-white border w-85 border-gray-400 bg-white/10 backdrop-blur-sm"
                             value={input}
                             onChange={(e) => {
-                                setErrorMessage("")
-                                setInput(e.target.value)
-                            }
-                            }
+                                setErrorMessage("");
+                                setInput(e.target.value);
+                            }}
                         />
 
+
                         {errorMessage && (
-                            <p className="text-red-400 mt-1 text-sm starting:opacity-0 opacity-100 duration-200 ease-linear">{errorMessage}</p>
+                            <p className="text-red-200 mt-1 text-base transition-opacity duration-200 ease-linear">
+                                {errorMessage}
+                            </p>
                         )}
                     </div>
-
                     <button
-                        className="block mx-auto bg-pink-500 px-6 py-2 rounded"
+                        disabled={!input}
+                        className="block mx-auto bg-pink-500 px-6 py-2 rounded hover:bg-pink-600 transition disabled:opacity-50"
                         onClick={handleUnlock}
                     >
                         Unlock
                     </button>
+
                 </div>
             </div>
+
         );
     }
 
@@ -199,7 +201,7 @@ export default function LovePage() {
             <section className="text-center">
                 <button
                     onClick={fireConfetti}
-                    className="bg-purple-600 px-6 py-3 rounded"
+                    className="bg-purple-600 px-6 py-3 rounded animate-pulse"
                 >
                     Celebrate Us 🎉
                 </button>
@@ -211,3 +213,51 @@ export default function LovePage() {
         </main>
     );
 }
+
+
+
+
+
+const images = [
+    "/cherry-1.jpg",
+    "/cherry-6.JPG",
+    "/cherry-8.JPG",
+    "/20251115_124854.jpg",
+    "/20251115_125255.jpg",
+    "/60194921-0B8F-417F-8A08-E0DEC657EC27.JPG",
+    "/IMG_0184.JPG",
+    "/IMG_20220128_155528_729.jpg",
+    "/IMG_8587.JPG",
+    "/IMG_8584.JPG",
+    "/IMG_5824.jpg",
+    "/IMG_5819.jpg",
+    "/IMG_5818.jpg",
+    "/IMG_5813.jpg",
+    "/IMG_5713.jpg",
+    "/IMG_5708.jpg",
+    "/IMG_5603.jpg",
+    "/IMG_5602.jpg",
+    "/IMG_5573.jpg",
+    "/IMG_5410.jpg",
+    "/IMG_4334.PNG",
+    "/IMG_3330.webp",
+    "/IMG_3257.jpg",
+    "/IMG_2999.jpg",
+    "/IMG_1967.jpg",
+    "/IMG_1915.JPG",
+    "/IMG_1903.jpg",
+    "/IMG_1863.jpg",
+    "/IMG_1846.jpg",
+    "/IMG_1692.jpeg",
+    "/IMG_1633.jpeg",
+    "/IMG_1620.jpeg",
+    "/IMG_0586.jpg",
+    "/IMG_0570.jpg",
+    "/IMG_0527.jpg",
+    "/IMG_0502.JPG",
+    "/IMG_0418.JPG"
+
+
+
+
+];
