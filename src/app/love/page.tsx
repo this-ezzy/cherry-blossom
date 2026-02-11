@@ -216,11 +216,11 @@ export default function LovePage() {
 
             {/* CELEBRATE BUTTON */}
             <section className="text-center">
-                <audio
+                {/* <audio
                     ref={audioRef}
                     src="/Marc_Anthoni_-_I_NEED_YOU_(mp3.pm).mp3"
                     preload="auto"
-                />
+                /> */}
                 <button
                     onClick={fireConfetti}
                     className="bg-purple-600 px-6 py-3 rounded animate-pulse"
