@@ -122,16 +122,20 @@ export default function LovePage() {
                     <h1 className="text-3xl font-bold">My Cherry Blossom ❤️</h1>
 
                     <div>
-                        <input
-                            type="date"
-                            placeholder="Select date"
-                            className="px-4 py-2 rounded-md text-white border w-85 border-gray-400 bg-black/10"
-                            value={input}
-                            onChange={(e) => {
-                                setErrorMessage("");
-                                setInput(e.target.value);
-                            }}
-                        />
+                        <div className="relative w-85">
+                            <input
+                                type="date"
+                                className="px-4 py-2 pr-10 rounded-md text-white border border-gray-400 bg-black/10 w-full accent-white"
+                                value={input}
+                                onChange={(e) => {
+                                    setErrorMessage("");
+                                    setInput(e.target.value);
+                                }}
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white pointer-events-none">
+                                📅
+                            </span>
+                        </div>
 
 
                         {errorMessage && (
