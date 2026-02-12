@@ -122,10 +122,10 @@ export default function LovePage() {
                     <h1 className="text-3xl font-bold">My Cherry Blossom ❤️</h1>
 
                     <div>
-                        <div className="relative w-full md:w-85">
+                        <div className="relative w-full md:w-85 max-w-95">
                             <input
                                 type="date"
-                                className="px-4 py-2 pr-10 rounded-md text-white border border-gray-400 bg-black/10 w-full accent-white"
+                                className="px-4 py-2 pr-10 rounded-md text-white border border-gray-400 bg-black/10 w-full max-w-95 accent-white"
                                 value={input}
                                 onChange={(e) => {
                                     setErrorMessage("");
