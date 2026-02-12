@@ -124,8 +124,8 @@ export default function LovePage() {
                     <div>
                         <input
                             type="date"
-
-                            className="px-4 py-2 rounded-md text-white border w-85 border-gray-400 bg-white/10 backdrop-blur-sm"
+                            placeholder="Select date"
+                            className="px-4 py-2 rounded-md text-white border w-85 border-gray-400 bg-black/10"
                             value={input}
                             onChange={(e) => {
                                 setErrorMessage("");
